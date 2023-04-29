@@ -1,0 +1,18 @@
+{% extends 'base_layout.html' %}
+{% load static from static %}
+
+{% block content %}
+<form class="site-form has-background-light" method="post" action="{% url 'blog:create' %}"
+      enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <div class="has-text-centered my-3">
+        <button type="submit" class="button" style="background-color: #fae76b">
+            Отправить
+        </button>
+        <a href="{% url 'blog:home' %}" class="button" style="background-color: #c77689">
+            Назад
+        </a>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% load static from static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'bulma.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+<section class="hero is-fullheight" style="background-color: #b486d5">
+    <!-- Hero head: will stick at the top -->
+    <div class="hero-head">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="{% url 'blog:home' %}">
+                        <img src="https://svgsilh.com/svg_v2/606684.svg" alt="Logo"
+                             style="height: 50px; width: 100px; max-height: 3rem">
+                    </a>
+                    <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+                </div>
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                    <div class="navbar-start">
+                        <span class="navbar-item">
+                            <a href="{% url 'blog:create' %}" class="button is-info is-outlined is-inverted">
+                                <span class="mr-2">
+                                    <ion-icon name="book-outline"></ion-icon>
+                                </span>
+                                <span class="content">Создать пост</span>
+                            </a>
+                        </span>
+                    </div>
+                    <div class="navbar-end">
+                        <span class="navbar-item">
+                              <a href="" class="button is-info is-outlined is-inverted">
+                                  <span class="mr-2">
+                                      <ion-icon name="exit-outline"></ion-icon>
+                                  </span>
+                                  <span class="content">Выход</span>
+                              </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Hero content: will be in the middle -->
+    <div class="hero-body">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</section>
+</body>
+</html>
