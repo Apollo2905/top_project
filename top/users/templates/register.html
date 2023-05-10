@@ -2,5 +2,22 @@
 {% load static from static %}
 
 {% block content %}
-
+<form class="site-form has-background-light" method="post">
+    <div class="title is-2 has-text-centered has-text-black">
+        Регистрация
+    </div>
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" class="button is-success is-fullwidth">
+        Зарегистрироваться
+    </button>
+    <div class="content has-text-centered">
+        <div class="subtitle has-text-black is-6">
+            Уже есть аккаунт?
+        </div>
+        <a href="{% url 'users:log_in' %}" class="button is-ghost is-info">
+            Перейти на страницу авторизации -->
+        </a>
+    </div>
+</form>
 {% endblock %}

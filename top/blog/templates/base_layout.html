@@ -15,6 +15,7 @@
 <body>
 <section class="hero is-fullheight" style="background-color: #b486d5">
     <!-- Hero head: will stick at the top -->
+    {% if user.is_authenticated %}
     <div class="hero-head">
         <nav class="navbar">
             <div class="container">
@@ -42,7 +43,13 @@
                     </div>
                     <div class="navbar-end">
                         <span class="navbar-item">
-                              <a href="" class="button is-info is-outlined is-inverted">
+                            <a href="" class="button is-info">
+                            Добро пожаловать, {{ request.user }}
+                            </a>
+                        </span>
+
+                        <span class="navbar-item">
+                              <a href="{% url 'users:log_out' %}" class="button is-info is-outlined is-inverted">
                                   <span class="mr-2">
                                       <ion-icon name="exit-outline"></ion-icon>
                                   </span>
@@ -54,7 +61,7 @@
             </div>
         </nav>
     </div>
-
+    {% endif %}
     <!-- Hero content: will be in the middle -->
     <div class="hero-body">
         {% block content %}

@@ -2,14 +2,17 @@ from django.shortcuts import render, redirect
 from .models import *  # импортирование модели
 from .models import Post
 from .forms import PostForm
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='/users/log_in')
 def home(request):
     posts = Post.objects.all()  # запрос в базу данных
     # print(courses[0].description)
     return render(request, 'home.html', {'posts': posts})  # отправка в html
 
 
+@login_required(login_url='/users/log_in')
 def post(request, slug):
     post_detail = Post.objects.get(slug=slug)
     # print(post_detail.title)
@@ -18,6 +21,7 @@ def post(request, slug):
     return render(request, 'post.html', {'post': post_detail})
 
 
+@login_required(login_url='/users/log_in')
 def create(request):
     print(request.POST)
     print(request.FILES)
@@ -35,6 +39,7 @@ def create(request):
     return render(request, 'create.html', {'form': form})
 
 
+@login_required(login_url='/users/log_in')
 def delete_post(request, slug):
     post_data = Post.objects.get(slug=slug)
     if request.method == 'POST':
@@ -43,6 +48,7 @@ def delete_post(request, slug):
     return render(request, 'delete_post.html', {'post': post_data})
 
 
+@login_required(login_url='/users/log_in')
 def edit_post(request, slug):
     post_data = Post.objects.get(slug=slug)
     form = PostForm(request.POST or None, request.FILES or None, instance=post_data)

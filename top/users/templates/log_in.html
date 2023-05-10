@@ -2,5 +2,29 @@
 {% load static from static %}
 
 {% block content %}
-
+<form class="site-form has-background-light" method="post">
+    {% if not valid_user %}
+    <div class="notification is-warning">
+        <div class="title is-6 has-text-grey has-text-centered">
+            Проверьте правильность введенных данных!
+        </div>
+    </div>
+    {% endif %}
+    <div class="title is-2 has-text-centered has-text-black">
+        Вход
+    </div>
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" class="button is-success is-fullwidth my-3">
+        Войти
+    </button>
+    <div class="content has-text-centered">
+        <div class="subtitle has-text-black is-6">
+            Нет аккаунта?
+        </div>
+        <a href="{% url 'users:register' %}" class="button is-ghost is-info">
+            Перейти на страницу регистрации -->
+        </a>
+    </div>
+</form>
 {% endblock %}
