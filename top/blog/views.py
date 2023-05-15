@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *  # импортирование модели
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -15,10 +15,14 @@ def home(request):
 @login_required(login_url='/users/log_in')
 def post(request, slug):
     post_detail = Post.objects.get(slug=slug)
-    # print(post_detail.title)
-    # print(post_detail.text)
-    # print(post_detail.image)
-    return render(request, 'post.html', {'post': post_detail})
+    form = CommentForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        instance = form.save(commit=False)
+        instance.user = request.user
+        instance.post = post_detail
+        instance.save()
+        return redirect('blog:post', slug=slug)
+    return render(request, 'post.html', {'post': post_detail, 'form': form})
 
 
 @login_required(login_url='/users/log_in')

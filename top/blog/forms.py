@@ -14,3 +14,15 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'text', 'image']
+
+
+class CommentForm(forms.ModelForm):
+    body = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'textarea',
+        'size': '40',
+        'placeholder': 'Оставьте комментарий...',
+    }))
+
+    class Meta:
+        model = Comment
+        fields = ['body', ]

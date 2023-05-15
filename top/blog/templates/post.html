@@ -26,11 +26,20 @@
     <div class="subtitle has-text-black">
         {{post.text}}
     </div>
-    <div class="columns is-gapless">
+    <div class="subtitle is-7 has-text-right">
+        {% if post.author == user %}
+        Опубликовано Вами
+        {% else %}
+        Опубликовано {{ post.author }}
+        {% endif %}
+        <div>{{post.date}}</div>
+    </div>
+
+    <div class="columns is-gapless my-3">
         <form method="post" class="has-text-right" action="{% url 'blog:like' post.slug %}">
             {% csrf_token %}
             <button class="button  {% if user in post.likes.all %} is-success {% endif %} " type="submit">
-                <ion-icon name="thumbs-up-outline"></ion-icon>
+                <ion-icon name="heart-outline"></ion-icon>
                 <span class="ml-3">
                     {{ post.likes_counter }}
                 </span>
@@ -39,20 +48,44 @@
         <form method="post" class="has-text-right" action="{% url 'blog:dislike' post.slug %}">
             {% csrf_token %}
             <button class=" button {% if user in post.dislikes.all %} is-danger {% endif %} " type="submit">
-                <ion-icon name="thumbs-down-outline"></ion-icon>
+                <ion-icon name="heart-dislike-outline"></ion-icon>
                 <span class="ml-3">
                     {{ post.dislikes_counter }}
                 </span>
             </button>
         </form>
     </div>
-    <div class="subtitle is-6">
-        {% if post.author == user %}
-        published by you
-        {% else %}
-        by {{ post.author }}
-        {% endif %}
-        <div>{{post.date}}</div>
+
+
+    <form method="post" enctype="multipart/form-data" class="comment has-text-right">
+        {% csrf_token %}
+        {{form}}
+        <button class="button is-info my-3">
+            Отправить
+        </button>
+    </form>
+    {% if not post.comment_set.all %}
+    <div class="has-text-centered has-text-grey-light subtitle is-6 my-4">
+        0 комментариев
     </div>
+    {% else %}
+    <p class="has-text-centered is-size-3 mb-6">
+        Комментарии
+    </p>
+    <div class="columns is-multiline">
+        {% for comment in post.comment_set.all %}
+        <div class="column is-4">
+            <article class="message is-info">
+                <div class="message-header">
+                    Добавлено {{comment.user}} в {{comment.date}}
+                </div>
+                <div class="message-body">
+                    {{comment.body}}
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

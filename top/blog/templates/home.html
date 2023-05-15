@@ -27,6 +27,29 @@
                             {{post.snippet}}
                             <br>
                             <div>{{post.date}}</div>
+
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <div class="columns is-gapless is-flex is-justify-content-center is-align-items-center">
+                                        <div class="column">
+                                            <ion-icon name="heart-outline" style="color: red"></ion-icon>
+                                        </div>
+                                        <div class="column">
+                                            <span class="ml-2">{{post.likes_counter}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-2">
+                                    <div class="columns is-gapless is-flex is-justify-content-center is-align-items-center">
+                                        <div class="column">
+                                            <ion-icon name="heart-dislike-outline" style="color: black"></ion-icon>
+                                        </div>
+                                        <div class="column">
+                                            <span class="ml-2">{{post.dislikes_counter}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
