@@ -26,6 +26,26 @@
     <div class="subtitle has-text-black">
         {{post.text}}
     </div>
+    <div class="columns is-gapless">
+        <form method="post" class="has-text-right" action="{% url 'blog:like' post.slug %}">
+            {% csrf_token %}
+            <button class="button  {% if user in post.likes.all %} is-success {% endif %} " type="submit">
+                <ion-icon name="thumbs-up-outline"></ion-icon>
+                <span class="ml-3">
+                    {{ post.likes_counter }}
+                </span>
+            </button>
+        </form>
+        <form method="post" class="has-text-right" action="{% url 'blog:dislike' post.slug %}">
+            {% csrf_token %}
+            <button class=" button {% if user in post.dislikes.all %} is-danger {% endif %} " type="submit">
+                <ion-icon name="thumbs-down-outline"></ion-icon>
+                <span class="ml-3">
+                    {{ post.dislikes_counter }}
+                </span>
+            </button>
+        </form>
+    </div>
     <div class="subtitle is-6">
         {% if post.author == user %}
         published by you

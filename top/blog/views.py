@@ -56,3 +56,27 @@ def edit_post(request, slug):
         form.save()
         return redirect('blog:post', slug=slug)
     return render(request, 'edit_post.html', {'form': form, 'post': post_data})
+
+
+@login_required(login_url='/users/log_in')
+def like(request, slug):
+    post_data = Post.objects.get(slug=slug)
+
+    if request.user not in post_data.likes.all():
+        post_data.likes.add(request.user)
+        post_data.dislikes.remove(request.user)
+    elif request.user in post_data.likes.all():
+        post_data.likes.remove(request.user)
+    return redirect('blog:post', slug=slug)
+
+
+@login_required(login_url='/users/log_in')
+def dislike(request, slug):
+    post_data = Post.objects.get(slug=slug)
+
+    if request.user not in post_data.dislikes.all():
+        post_data.dislikes.add(request.user)
+        post_data.likes.remove(request.user)
+    elif request.user in post_data.dislikes.all():
+        post_data.dislikes.remove(request.user)
+    return redirect('blog:post', slug=slug)
