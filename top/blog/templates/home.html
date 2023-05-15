@@ -14,6 +14,13 @@
                                 <div class="title has-text-black is-2">
                                     {{post}}
                                 </div>
+                                <div class="subtitle is-6">
+                                    {% if post.author == user %}
+                                    by you
+                                    {% else %}
+                                    by {{ post.author }}
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                         <div class="content">

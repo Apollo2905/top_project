@@ -4,12 +4,14 @@
 {% block content %}
 <div class="box has-text-centered" style="min-width: 100% ">
     <div class="has-text-right">
+        {% if post.author == user %}
         <a href="{% url 'blog:edit_post' post.slug %}" class="button is-info">
             <ion-icon name="create-outline"></ion-icon>
         </a>
         <a href="{% url 'blog:delete_post' post.slug %}" class="button is-danger">
             <ion-icon name="trash-outline"></ion-icon>
         </a>
+        {% endif %}
     </div>
     <div class="title has-text-black">
         {{post}}
@@ -23,6 +25,14 @@
 
     <div class="subtitle has-text-black">
         {{post.text}}
+    </div>
+    <div class="subtitle is-6">
+        {% if post.author == user %}
+        published by you
+        {% else %}
+        by {{ post.author }}
+        {% endif %}
+        <div>{{post.date}}</div>
     </div>
 </div>
 {% endblock %}
