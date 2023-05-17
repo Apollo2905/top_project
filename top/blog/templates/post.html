@@ -4,7 +4,7 @@
 {% block content %}
 <div class="box has-text-centered" style="min-width: 100% ">
     <div class="has-text-right">
-        {% if post.author == user %}
+        {% if user == post.author %}
         <a href="{% url 'blog:edit_post' post.slug %}" class="button is-info">
             <ion-icon name="create-outline"></ion-icon>
         </a>
@@ -26,8 +26,8 @@
     <div class="subtitle has-text-black">
         {{post.text}}
     </div>
-    <div class="subtitle is-7 has-text-right">
-        {% if post.author == user %}
+    <div class="subtitle is-7 has-text-right has-text-grey is-italic">
+        {% if user == post.author %}
         Опубликовано Вами
         {% else %}
         Опубликовано {{ post.author }}
@@ -81,6 +81,14 @@
                 </div>
                 <div class="message-body">
                     {{comment.body}}
+                    <div class="buttons has-addons my-3 is-right">
+                        <a href="{% url 'blog:comment_delete' comment.pk %}" class="button is-multiline">
+                            <ion-icon name="trash-outline"></ion-icon>
+                        </a>
+                        <a href="{% url 'blog:comment_edit' comment.pk %}" class="button is-multiline">
+                            <ion-icon name="create-outline"></ion-icon>
+                        </a>
+                    </div>
                 </div>
             </article>
         </div>

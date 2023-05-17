@@ -9,6 +9,8 @@ urlpatterns = [
     path('edit/<slug>', views.edit_post, name='edit_post'),
     path('like/<slug>', views.like, name='like'),
     path('dislike/<slug>', views.dislike, name='dislike'),
+    path('comment_delete/<int:pk>', views.comment_delete, name='comment_delete'),
+    path('comment_edit/<int:pk>', views.comment_edit, name='comment_edit'),
 ]
 # namespace - для работы со ссылками
 

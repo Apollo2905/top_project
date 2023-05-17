@@ -44,6 +44,20 @@
                     </div>
                     <div class="navbar-end">
                         <span class="navbar-item">
+                            <form method="get" class="mt-4">
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <input type="search" name="search" class="input">
+                                    </div>
+                                    <div class="control">
+                                        <button type="submit" class="button">
+                                            <ion-icon name="search-outline"></ion-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </span>
+                        <span class="navbar-item">
                             <a href="" class="button is-info">
                             Добро пожаловать, {{ request.user }}
                             </a>

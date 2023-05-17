@@ -14,11 +14,11 @@
                                 <div class="title has-text-black is-2">
                                     {{post}}
                                 </div>
-                                <div class="subtitle is-6">
-                                    {% if post.author == user %}
-                                    by you
+                                <div class="subtitle is-6 has-text-grey">
+                                    {% if user == post.author %}
+                                    Опубликовано Вами
                                     {% else %}
-                                    by {{ post.author }}
+                                    Опубликовано {{ post.author }}
                                     {% endif %}
                                 </div>
                             </div>
