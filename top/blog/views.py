@@ -27,6 +27,10 @@ def post(request, slug):
         return redirect('blog:post', slug=slug)
     return render(request, 'post.html', {'post': post_detail, 'form': form})
 
+@login_required(login_url='/users/log_in')
+def myposts(request):
+    mypost = Post.objects.filter(author=request.user)
+    return render(request, 'myposts.html', {'posts': mypost})
 
 @login_required(login_url='/users/log_in')
 def create(request):

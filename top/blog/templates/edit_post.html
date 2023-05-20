@@ -2,6 +2,7 @@
 {% load static from static %}
 
 {% block content %}
+{% if post.author == user %}
 <form method="post" class="site-form has-background-light" enctype="multipart/form-data">
     <p class="title has-text-centered is-4 mb-5 has-text-black">
         Изменение поста "{{post}}"
@@ -15,5 +16,13 @@
         </a>
     </div>
 </form>
-{% endblock%}
+{% else %}
 
+<form method="post" class="site-form has-background-light">
+    {% csrf_token %}
+    <p class="title has-text-centered is-4 has-text-black">
+        Вы не можете редактировать пост, так как не являетесь его автором
+    </p>
+</form>
+{% endif %}
+{% endblock%}

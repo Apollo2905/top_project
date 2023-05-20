@@ -11,6 +11,7 @@ urlpatterns = [
     path('dislike/<slug>', views.dislike, name='dislike'),
     path('comment_delete/<int:pk>', views.comment_delete, name='comment_delete'),
     path('comment_edit/<int:pk>', views.comment_edit, name='comment_edit'),
+    path('myposts/', views.myposts, name='myposts'),
 ]
 # namespace - для работы со ссылками
 

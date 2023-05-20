@@ -26,14 +26,7 @@
     <div class="subtitle has-text-black">
         {{post.text}}
     </div>
-    <div class="subtitle is-7 has-text-right has-text-grey is-italic">
-        {% if user == post.author %}
-        Опубликовано Вами
-        {% else %}
-        Опубликовано {{ post.author }}
-        {% endif %}
-        <div>{{post.date}}</div>
-    </div>
+
 
     <div class="columns is-gapless my-3">
         <form method="post" class="has-text-right" action="{% url 'blog:like' post.slug %}">
